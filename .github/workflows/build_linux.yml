@@ -39,7 +39,7 @@ jobs:
 
       - name: Build 
         run: |
-          mkdir "$QHOME" && mkdir cmake && cd cmake && cmake --build .. --config Release --target install && cd .. && tar  -zcvf "$OUTPUT_FILE" -C cmake/ffikdb .
+          mkdir "$QHOME" && mkdir cmake && cd cmake && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release --target install && cd .. && tar  -zcvf "$OUTPUT_FILE" -C cmake/ffikdb .
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v6
