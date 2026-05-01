@@ -25,6 +25,7 @@ jobs:
       - name: Download dlfcn
         shell: pwsh
         run: |
+          mkdir cbuild
           $uri = "https://github.com/dlfcn-win32/dlfcn-win32/archive/v1.2.0.tar.gz"
           $out = "v1.2.0.tar.gz"
           Invoke-WebRequest -Uri $uri -OutFile $out
@@ -32,7 +33,6 @@ jobs:
 
       - name: Build dlfcn
         run: |
-          mkdir cbuild
           cd cbuild
           mkdir install
           mkdir build
