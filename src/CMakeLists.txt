@@ -30,6 +30,8 @@ target_include_directories(${MY_LIBRARY_NAME} PRIVATE
     ${PROJECT_SOURCE_DIR}/include
 )
 
+message(STATUS "FFI_INSTALL_DIR : $ENV{FFI_INSTALL_DIR}")
+
 if(APPLE)
     # FFI header exists under /usr/include/ffi for ver<=10.13
     target_include_directories(${MY_LIBRARY_NAME} PRIVATE
@@ -37,6 +39,7 @@ if(APPLE)
         $<$<NOT:$<STREQUAL:"$ENV{FFI_INSTALL_DIR}","">>: $ENV{FFI_INSTALL_DIR}/include>
     )
 elseif(WIN32)
+    message(STATUS "DL_INSTALL_DIR : $ENV{DL_INSTALL_DIR}")
     # Windows use installed dlfcn-win32 and installed libffi
     target_include_directories(${MY_LIBRARY_NAME} PRIVATE
         $ENV{DL_INSTALL_DIR}/include/
