@@ -18,7 +18,7 @@ jobs:
       OUTPUT_FILE: ffikdb-win.tgz
       DL_INSTALL_DIR: ${{ github.workspace }}\cbuild\install
       FFI_INSTALL_DIR: ${{ github.workspace }}\travis_win\libffi\install
-      LD_LIBRARY_PATH: ${{ env.FFI_INSTALL_DIR }}\bin:${DL_INSTALL_DIR}\lib:${LD_LIBRARY_PATH}
+      LD_LIBRARY_PATH: ${FFI_INSTALL_DIR}\bin:${DL_INSTALL_DIR}\lib:${LD_LIBRARY_PATH}
       QHOME: ${{ github.workspace }}\qhome
 
     steps:
