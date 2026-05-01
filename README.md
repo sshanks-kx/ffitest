@@ -1,5 +1,6 @@
 # FFI for kdb+
 
+
 FFI (foreign function interface) is a mechanism by which a program written in one programming language can call routines or make use of services written in another. Some programs may not know at the time of compilation what arguments are to be passed to a function. For instance, an interpreter may be told at run-time about the number and types of arguments used to call a given function. Libffi can be used in such programs to provide a bridge from the interpreter program to compiled code.
 
 `ffikdb` is an extension to kdb+ for loading and calling dynamic libraries using pure `q`. 
