@@ -122,11 +122,14 @@ set_target_properties(${MY_LIBRARY_NAME} PROPERTIES PREFIX "")
 ##%% Installation %%##vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv/
 
 # Copy built shared object after build instead of during installation
-add_custom_command(TARGET ${MY_LIBRARY_NAME}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:${MY_LIBRARY_NAME}>" ${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}/lib/${MY_LIBRARY_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
-    DEPENDS ${MY_LIBRARY_NAME}
+add_custom_command(TARGET ${MY_LIBRARY_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+        "${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}/lib"
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "$<TARGET_FILE:${MY_LIBRARY_NAME}>"
+        "${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}/lib/$<TARGET_FILE_NAME:${MY_LIBRARY_NAME}>"
 )
 
 # Install package at release and copy shared object to QHOME
-install(TARGETS ${MY_LIBRARY_NAME} DESTINATION $ENV{QHOME}/${OSFLAG}${BITNESS}/ CONFIGURATIONS Release)
+file(TO_CMAKE_PATH "$ENV{QHOME}" QHOME_CMAKE)
+install(TARGETS ${MY_LIBRARY_NAME} DESTINATION "${QHOME_CMAKE}/${OSFLAG}${BITNESS}" CONFIGURATIONS Release)
